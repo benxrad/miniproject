@@ -73,8 +73,14 @@ try:
 
             if not request:
                 continue
-
+            
+            print(  "+----------------------+\n"
+                    "Established connecttion with:\nIP:", client_address[0],
+                    "\nPort:",client_address[1],
+                    "\n+----------------------+\n")
+            
             request_text = request.decode("iso-8859-1")
+            print("Request header:\n")
             print(request_text)
             request_lines = request_text.split("\r\n")
             request_parts = request_lines[0].split()
