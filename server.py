@@ -156,7 +156,7 @@ finally:
 # curl -i http://localhost:9090/test.html
 #
 # 304 Not Modified:
-# curl -i -H "If-Modified-Since: Wed, 30 Jul 2026 12:00:00 GMT" http://localhost:9090/test.html
+# curl -i -H "If-Modified-Since: Wed, 30 Aug 2026 12:00:00 GMT" http://localhost:9090/test.html
 #
 # 403 Forbidden:
 # curl -i http://localhost:9090/forbidden.html
