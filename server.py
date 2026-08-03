@@ -8,7 +8,7 @@ HOST, PORT = "", 9090
 SERVER_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 SUPPORTED_VERSION = "HTTP/1.1"
 
-
+# Sends a response http message back to the client
 def send_response(client_connection, status, body=b"", content_type="text/plain; charset=utf-8"):
     """Send one complete HTTP response to the client."""
     response = (
@@ -33,7 +33,10 @@ def get_headers(request_lines):
 
     return headers
 
-
+# Returns true if the file has not been changed since {if-modified-since} 
+# object in the header and false if it has been changed.
+# If true: send file to client
+# If false: send FILE NOT MODIFIED 304
 def was_not_modified(file_path, if_modified_since):
     """Return True when the file has not changed since the supplied date."""
     if not if_modified_since:
@@ -46,6 +49,9 @@ def was_not_modified(file_path, if_modified_since):
             request_date = request_date.replace(tzinfo=timezone.utc)
 
         file_modified_time = os.path.getmtime(file_path)
+
+        # Returns true if the file on system has an older {last-modified} timestamp than {if-modified-since} header
+        # True means the last time file was changed on system was before the {if-modified-since} header value.
         return file_modified_time <= request_date.timestamp()
     except (TypeError, ValueError, OverflowError):
         # Ignore an invalid If-Modified-Since header.
