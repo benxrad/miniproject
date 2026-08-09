@@ -188,7 +188,7 @@ def handle_client(client_connection, client_address):
             # Convert the cached file's modification time to an HTTP date.
             cached_modified_time = os.path.getmtime(cache_path)
             modified_date = formatdate(cached_modified_time, usegmt=True)
-            print(f"CACHE EXISTS: {cache_path}")
+            print(f"CACHE HIT: {cache_path}")
             print(f"If-Modified-Since: {modified_date}")
 
             origin_request = build_origin_request(requested_path, modified_date)
